@@ -147,5 +147,20 @@ class TestEqualityProtocol(unittest.TestCase):
         s = SortedFrozenSet([4, 5, 6])
         self.assertTrue(s == s)
 
+class TestInequalityProtocol(unittest.TestCase):
+
+    def test_positive_unequal(self):
+        self.assertTrue(SortedFrozenSet([1, 2, 3]) != SortedFrozenSet([4, 5, 6]))
+
+    def test_negative_unequal(self):
+        self.assertFalse(SortedFrozenSet([7, 8, 9]) != SortedFrozenSet([7, 8, 9]))
+
+    def test_type_mismatch(self):
+        self.assertTrue(SortedFrozenSet([4, 5, 6]) != [4, 5, 6])
+
+    def test_identical(self):
+        s = SortedFrozenSet([1, 2, 3])
+        self.assertFalse(s != s)
+
 if __name__ == '__main__':
     unittest.main()
