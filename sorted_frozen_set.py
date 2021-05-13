@@ -1,4 +1,6 @@
-class SortedFrozenSet:
+from collections.abc import Sequence
+
+class SortedFrozenSet(Sequence):
   
     def __init__(self, items=None):
         self._items = tuple(sorted(

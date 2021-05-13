@@ -122,6 +122,39 @@ class TestSequenceProtocol(unittest.TestCase):
     def test_slice_full(self):
         self.assertEqual(self.s[:], self.s)
 
+    #Reversed
+    def test_reversed(self):
+        s = SortedFrozenSet([1, 3, 5, 7])
+        r = reversed(s)
+        self.assertEqual(next(r), 7)
+        self.assertEqual(next(r), 5)
+        self.assertEqual(next(r), 3)
+        self.assertEqual(next(r), 1)
+        self.assertRaises(
+            StopIteration,
+            lambda: next(r)
+        )
+
+    #Index
+    def test_index_positive(self):
+        s = SortedFrozenSet([1, 5, 8, 9])
+        self.assertEqual(s.index(5), 1)
+
+    def test_index_negative(self):
+        s = SortedFrozenSet([1, 5, 8, 9])
+        with self.assertRaises(ValueError):
+            s.index(10)
+
+    #Count
+    def test_count_zero(self):
+        s = SortedFrozenSet([1, 5, 7, 9])
+        self.assertEqual(s.count(12), 0)
+
+    def test_count_one(self):
+        s = SortedFrozenSet([1, 5, 7, 9])
+        self.assertEqual(s.count(9), 1)
+
+
 class TestReprProtocol(unittest.TestCase):
 
     def test_repr_empty(self):
