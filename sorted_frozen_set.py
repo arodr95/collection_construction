@@ -17,3 +17,10 @@ class SortedFrozenSet:
     #   OR
     #   for item in self._items:
     #       yield item (generator function)
+
+    def __getitem__(self, index):
+        result = self._items[index]
+        return(
+            SortedFrozenSet(result) if isinstance(index, slice)
+            else result
+        )

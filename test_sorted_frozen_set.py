@@ -77,5 +77,50 @@ class TestIterableProtocol(unittest.TestCase):
             self.assertEqual(item, expected[index])
             index += 1
 
+class TestSequenceProtocol(unittest.TestCase):
+
+    def setUp(self):
+        self.s = SortedFrozenSet([1, 4, 9, 13, 15])
+
+    #Indexing
+    def test_index_zero(self):
+        self.assertEqual(self.s[0], 1)
+
+    def test_index_four(self):
+        self.assertEqual(self.s[4], 15)
+
+    def test_index_one_beyond_end(self):
+        with self.assertRaises(IndexError):
+            self.s[5]
+
+    def test_index_minus_one(self):
+        self.assertEqual(self.s[-1], 15)
+
+    def test_index_minus_five(self):
+        self.assertEqual(self.s[-5], 1)
+
+    def test_index_one_before_beginning(self):
+        with self.assertRaises(IndexError):
+            self.s[-6]
+
+    #Slicing
+    def test_slice_from_start(self):
+        self.assertEqual(self.s[:2], SortedFrozenSet([1, 4]))
+
+    def test_slice_to_end(self):
+        self.assertEqual(self.s[3:], SortedFrozenSet([13, 15]))
+
+    def test_slice_empty(self):
+        self.assertEqual(self.s[10:], SortedFrozenSet())
+
+    def test_slice_arbitrary(self):
+        self.assertEqual(self.s[1:4], SortedFrozenSet([4, 9, 13]))
+
+    def test_slice_step(self):
+        self.assertEqual(self.s[0:5, 2], SortedFrozenSet([1, 9, 15]))
+
+    def test_slice_full(self):
+        self.assertEqual(self.s[:], self.s)
+
 if __name__ == '__main__':
     unittest.main()
