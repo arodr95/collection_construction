@@ -69,6 +69,5 @@ class TestIterableProtocol(unittest.TestCase):
             lambda: next(iterator)
         )
 
-
 if __name__ == '__main__':
     unittest.main()
