@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+from itertools import chain
 
 class SortedFrozenSet(Sequence):
   
@@ -49,3 +50,16 @@ class SortedFrozenSet(Sequence):
         return hash(
             (type(self), self._items)
         )
+
+    def __add__(self, rhs):
+        if  not isinstance(rhs, type(self)):
+            return NotImplemented
+        return SortedFrozenSet(
+            chain(self._items, rhs._items)
+        )
+
+    def __mul__(self, rhs):
+        return self if rhs > 0 else SortedFrozenSet()
+
+    def __rmul__(self, lhs ):
+        return self * lhs
