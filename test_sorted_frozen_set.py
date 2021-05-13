@@ -70,5 +70,12 @@ class TestIterableProtocol(unittest.TestCase):
             lambda: next(iterator)
         )
 
+    def test_for_loop(self):
+        expected = [1, 2, 7, 9]
+        index = 0
+        for item in expected:
+            self.assertEqual(item, expected[index])
+            index += 1
+
 if __name__ == '__main__':
     unittest.main()

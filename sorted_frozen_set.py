@@ -14,3 +14,6 @@ class SortedFrozenSet:
 
     def __iter__(self):
         return iter(self._items)
+    #   OR
+    #   for item in self._items:
+    #       yield item (generator function)
