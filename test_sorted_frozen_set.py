@@ -162,5 +162,13 @@ class TestInequalityProtocol(unittest.TestCase):
         s = SortedFrozenSet([1, 2, 3])
         self.assertFalse(s != s)
 
+class TestHashableProtocol(unittest.TestCase):
+
+    def test_equal_sets_have_same_hash_code(self):
+        self.assertEqual(
+            hash(SortedFrozenSet([5, 2, 1, 4])),
+            hash(SortedFrozenSet([5, 2, 1, 4]))
+        )
+
 if __name__ == '__main__':
     unittest.main()

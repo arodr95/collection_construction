@@ -1,10 +1,10 @@
 class SortedFrozenSet:
   
     def __init__(self, items=None):
-        self._items = sorted(
+        self._items = tuple(sorted(
             set(items) if (items is not None)
             else set()
-        )
+        ))
 
     def __contains__(self, item):
         return item in self._items
@@ -29,8 +29,12 @@ class SortedFrozenSet:
         return "{type}({arg})".format(
             type = type(self).__name__,
             arg = (
-                repr(self._items) if self._items
-                else ""
+                "[{}]".format(
+                    ", ".join(
+                        map(repr, self._items)
+                    )
+                )
+                if self._items else ""
             )
         )
 
@@ -38,3 +42,8 @@ class SortedFrozenSet:
         if not isinstance(rhs, type(self)):
             return NotImplemented
         return self._items == rhs._items
+
+    def __hash__(self):
+        return hash(
+            (type(self), self._items)
+        )
