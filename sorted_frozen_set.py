@@ -33,3 +33,8 @@ class SortedFrozenSet:
                 else ""
             )
         )
+
+    def __eq__(self, rhs):
+        if not isinstance(rhs, type(self)):
+            return NotImplemented
+        return self._items == rhs._items
