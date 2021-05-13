@@ -15,6 +15,8 @@ class TestConstruction(unittest.TestCase):
         iterator = iter(items)
         s = SortedFrozenSet(iterator)
 
+    def test_construct_no_args(self):
+        s = SortedFrozenSet()
 
 if __name__ == '__main__':
     unittest.main()
