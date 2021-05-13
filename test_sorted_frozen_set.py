@@ -35,6 +35,21 @@ class TestContainerProtocol(unittest.TestCase):
     def test_negative_not_contained(self):
         self.assertFalse(9 not in self.s)
 
+class TestIterableProtocol(unittest.TestCase):
+
+    def setUp(self):
+        self.s = SortedFrozenSet([7, 5, 5, 3, 8])
+
+    def test_iter(self):
+        iterator = iter(self.s)
+        self.assertEqual(next(iterator), 3)
+        self.assertEqual(next(iterator), 5)
+        self.assertEqual(next(iterator), 7)
+        self.assertEqual(next(iterator), 8)
+        self.assertEqual(
+            StopIteration,
+            lambda: next(iterator)
+        )
 
 
 
