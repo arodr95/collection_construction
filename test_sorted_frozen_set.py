@@ -53,21 +53,5 @@ class TestSizedProtocol(unittest.TestCase):
         s = SortedFrozenSet(range(17))
         self.assertEqual(len(s), 17)
 
-class TestIterableProtocol(unittest.TestCase):
-
-    def setUp(self):
-        self.s = SortedFrozenSet([7, 5, 5, 3, 8])
-
-    def test_iter(self):
-        iterator = iter(self.s)
-        self.assertEqual(next(iterator), 3)
-        self.assertEqual(next(iterator), 5)
-        self.assertEqual(next(iterator), 7)
-        self.assertEqual(next(iterator), 8)
-        self.assertEqual(
-            StopIteration,
-            lambda: next(iterator)
-        )
-
 if __name__ == '__main__':
     unittest.main()
