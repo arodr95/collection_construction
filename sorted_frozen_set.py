@@ -63,3 +63,7 @@ class SortedFrozenSet(Sequence):
 
     def __rmul__(self, lhs ):
         return self * lhs
+      
+    def get_set_items(self):
+        return self._items
+      
